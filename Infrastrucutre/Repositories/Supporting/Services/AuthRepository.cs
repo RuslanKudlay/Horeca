@@ -1,5 +1,6 @@
 ﻿using Domain.Supporting.Auth.Entities;
 using Infrastrucutre.Repositories.Supporting.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastrucutre.Repositories.Supporting.Services;
 
@@ -16,5 +17,10 @@ public class AuthRepository : IAuthRepository
     {
         await _dbContext.Users.AddAsync(user);
         return await _dbContext.SaveChangesAsync() > 0;
+    }
+
+    public async Task<bool> VerifyExistingUser(string email)
+    {
+        return await _dbContext.Users.AnyAsync(u => u.Email == email);
     }
 }

@@ -17,6 +17,7 @@ public class Program
             options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 
         builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+        builder.Services.AddScoped<IPasswordHash, PasswordHash>();
         builder.Services.AddScoped<IAuthService, AuthService>();
         
         builder.Services.AddControllers();
