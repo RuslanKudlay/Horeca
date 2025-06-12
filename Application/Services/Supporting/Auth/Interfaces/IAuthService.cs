@@ -4,5 +4,6 @@ namespace Application.Supporting.Auth.Interfaces;
 
 public interface IAuthService
 {
-    Task<bool> CreateUserAsync(CreateUserRequest createUserRequest);
+    Task<bool> CreateUserAsync(CreateUserRequestDto createUserRequest);
+    Task<bool> ChangePasswordAsync(ChangePasswordDto changePassworRequest);
 }

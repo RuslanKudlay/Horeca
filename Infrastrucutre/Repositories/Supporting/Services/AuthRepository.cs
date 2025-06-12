@@ -19,8 +19,21 @@ public class AuthRepository : IAuthRepository
         return await _dbContext.SaveChangesAsync() > 0;
     }
 
+    public async Task<bool> ChangePasswordAsync(User user)
+    {
+        await _dbContext.Users.ExecuteUpdateAsync(setters => setters
+                .SetProperty(u => u.Password, user.Password)
+                .SetProperty(u => u.DateUpdated, user.DateUpdated));
+        return true;
+    }
+
     public async Task<bool> VerifyExistingUser(string email)
     {
         return await _dbContext.Users.AnyAsync(u => u.Email == email);
+    }
+
+    public async Task<User> GetByIdAsync(Guid userId)
+    {
+        return await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
     }
 }
