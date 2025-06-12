@@ -11,4 +11,18 @@
       <ProjectReference Include="..\ProjectMetaData\ProjectMetaData.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Repositories\Supporting\Auth\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Microsoft.AspNetCore.Http.Abstractions">
+        <HintPath>C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App\8.0.1\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.1.2" />
+    </ItemGroup>
+
 </Project>

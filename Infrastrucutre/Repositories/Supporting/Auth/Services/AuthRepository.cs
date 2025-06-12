@@ -1,5 +1,4 @@
-﻿using Domain.Supporting.Auth.Entities;
-using Infrastrucutre.Repositories.Supporting.Interfaces;
+﻿using Infrastrucutre.Repositories.Supporting.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastrucutre.Repositories.Supporting.Services;
@@ -13,13 +12,18 @@ public class AuthRepository : IAuthRepository
         _dbContext = dbContext;
     }
 
-    public async Task<bool> AddAsync(User user)
+    public async Task<bool> AddAsync(Domain.Supporting.Auth.Entities.User user)
     {
         await _dbContext.Users.AddAsync(user);
         return await _dbContext.SaveChangesAsync() > 0;
     }
 
-    public async Task<bool> ChangePasswordAsync(User user)
+    public async Task<Domain.Supporting.Auth.Entities.User> GetUserForLoginAsync(string email, string password)
+    {
+        return await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
+    }
+
+    public async Task<bool> ChangePasswordAsync(Domain.Supporting.Auth.Entities.User user)
     {
         await _dbContext.Users.ExecuteUpdateAsync(setters => setters
                 .SetProperty(u => u.Password, user.Password)
@@ -32,7 +36,7 @@ public class AuthRepository : IAuthRepository
         return await _dbContext.Users.AnyAsync(u => u.Email == email);
     }
 
-    public async Task<User> GetByIdAsync(Guid userId)
+    public async Task<Domain.Supporting.Auth.Entities.User> GetByIdAsync(Guid userId)
     {
         return await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
     }
