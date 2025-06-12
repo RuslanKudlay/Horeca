@@ -4,7 +4,7 @@ using Application.Supporting.Auth.Interfaces;
 
 namespace Application.Supporting.Auth.Services;
 
-public class PasswordHash : IPasswordHash
+public class PasswordHasher : IPasswordHasher
 {
     public string GetHash(string password)
     {
