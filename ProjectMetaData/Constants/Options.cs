@@ -14,7 +14,7 @@ public class Options
         public const int REFRESHLIFETIME = 30 * 24 * 60; // minutes
         public static SymmetricSecurityKey GetSymmetricSecurityKey()
         {
-            return new SymmetricSecurityKey(Encoding.ASCII.GetBytes(KEY));
+            return new SymmetricSecurityKey(Encoding.UTF8.GetBytes(KEY));
         }
     }
 }

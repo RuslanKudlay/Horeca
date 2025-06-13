@@ -41,16 +41,16 @@ public class AuthService : IAuthService
         {
             throw new CustomException("Помилка авторизації!");
         }
-        
+
+        var key = Options.AuthOptions.GetSymmetricSecurityKey();
         var now = DateTime.Now;
         var jwt = new JwtSecurityToken(
             issuer: Options.AuthOptions.ISSUER,
             audience: Options.AuthOptions.AUDIENCE,
             notBefore: now,
             claims: claim.Claims,
-            expires: now.Add(TimeSpan.FromMinutes(Options.AuthOptions.LIFETIME)),
-            signingCredentials: new SigningCredentials(Options.AuthOptions.GetSymmetricSecurityKey(),
-                SecurityAlgorithms.HmacSha256));
+            expires: now.AddSeconds(30),//now.Add(TimeSpan.FromMinutes(Options.AuthOptions.LIFETIME)),
+            signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256));
         var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
         return encodedJwt;

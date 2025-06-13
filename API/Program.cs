@@ -1,5 +1,8 @@
 using System.Reflection;
 using System.Text;
+using Application.Repositories.Supporting.User.Interfaces;
+using Application.Services.Supporting.User.Interfaces;
+using Application.Services.Supporting.User.Services;
 using Application.Supporting.Auth.Interfaces;
 using Application.Supporting.Auth.Services;
 using Horeca.Constants;
@@ -7,6 +10,7 @@ using Horeca.DTOs.Supporting.Auth;
 using Infrastrucutre;
 using Infrastrucutre.Repositories.Supporting.Interfaces;
 using Infrastrucutre.Repositories.Supporting.Services;
+using Infrastrucutre.Repositories.Supporting.User;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -46,6 +50,8 @@ public class Program
         builder.Services.AddScoped<IAuthRepository, AuthRepository>();
         builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
         builder.Services.AddScoped<IAuthService, AuthService>();
+        builder.Services.AddScoped<IUserService, UserService>();
+        builder.Services.AddScoped<IUserRepository, UserRepository>();
         
         builder.Services.AddControllers();
         
