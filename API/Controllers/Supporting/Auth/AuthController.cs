@@ -1,23 +1,15 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using Application.Supporting.Auth.Interfaces;
-using Horeca.Constants;
+﻿using Application.Supporting.Auth.Interfaces;
 using Horeca.DTOs.Supporting.Auth;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 
 namespace Horeca.Controllers.Supporting.Auth;
 public class AuthController : ControllerBase
 {
-    private readonly IMediator _mediator;
     private readonly IAuthService _authService;
-    
-
-    public AuthController(IMediator mediator, IAuthService authService) 
+    public AuthController(IAuthService authService) 
     {
-        _mediator = mediator;
         _authService = authService;
     }
 
