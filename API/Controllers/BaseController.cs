@@ -10,7 +10,7 @@ namespace Horeca.Controllers;
 [Route("api/[controller]")]
 //[Authorize(Policy = "TokenAuthorization")]
 [Authorize]
-public class BaseController<TQuery, TResult> : ControllerBase where TQuery : BaseQuery<TResult>
+public class BaseController<TRequest, TResult> : ControllerBase where TRequest : BaseQuery<TResult>
 {
     private readonly IMediator _mediator;
 
@@ -25,7 +25,7 @@ public class BaseController<TQuery, TResult> : ControllerBase where TQuery : Bas
     {
         try
         {
-            var data = await _mediator.Send(Activator.CreateInstance<TQuery>());
+            var data = await _mediator.Send(Activator.CreateInstance<TRequest>());
             return Ok(new ActionResultDto<TResult>()
             {
                 Data = data
