@@ -10,7 +10,7 @@ namespace Horeca.Controllers;
 [Route("api/[controller]")]
 //[Authorize(Policy = "TokenAuthorization")]
 [Authorize]
-public class BaseController<TRequest, TResult> : ControllerBase where TRequest : BaseQuery<TResult>
+public class BaseController<TRequest, TResult> : ControllerBase where TRequest : BaseRequest<TResult>
 {
     private readonly IMediator _mediator;
 
