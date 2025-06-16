@@ -65,30 +65,4 @@ public class AuthController : BaseController
             });
         }
     }
-
-    [HttpPost("change-password")]
-    [Produces("application/json")]
-    [ProducesResponseType(typeof(ActionResultDto<bool>), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ActionResultDto<bool>),StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(typeof(ActionResultDto<bool>),StatusCodes.Status403Forbidden)]
-    [ProducesResponseType(typeof(ActionResultDto<bool>),StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDto request)
-    {
-        try
-        {
-            var result = await _authService.ChangePasswordAsync(request);
-            return Ok(new ActionResultDto<bool>()
-            {
-                Data = result
-            });
-        }
-        catch (Exception e)
-        {
-            return BadRequest(new ActionResultDto<bool>()
-            {
-                Message = e.Message
-            });
-        }
-    }
-    
 }

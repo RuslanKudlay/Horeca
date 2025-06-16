@@ -1,5 +1,7 @@
 ﻿using Application.Repositories.Supporting.User.Interfaces;
 using Application.Services.Supporting.User.Interfaces;
+using Domain.Supporting.Auth.Exceptions;
+using Horeca.DTOs.Supporting.Auth;
 
 namespace Application.Services.Supporting.User.Services;
 

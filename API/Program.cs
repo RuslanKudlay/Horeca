@@ -1,12 +1,12 @@
-using System.Reflection;
-using System.Text;
+using Application.Commands.Supporting.Auth;
+using Application.Commands.Supporting.User;
+using Application.Queries.Supporting.User;
 using Application.Repositories.Supporting.User.Interfaces;
 using Application.Services.Supporting.User.Interfaces;
 using Application.Services.Supporting.User.Services;
 using Application.Supporting.Auth.Interfaces;
 using Application.Supporting.Auth.Services;
 using Horeca.Constants;
-using Horeca.DTOs.Supporting.Auth;
 using Infrastrucutre;
 using Infrastrucutre.Repositories.Supporting.Interfaces;
 using Infrastrucutre.Repositories.Supporting.Services;
@@ -46,6 +46,15 @@ public class Program
         builder.Services.AddAuthorization();
         
         builder.Services.AddHttpContextAccessor();
+
+        builder.Services.AddMediatR(cfg =>
+        {
+            cfg.RegisterServicesFromAssemblies(
+                typeof(ChangeUserPasswordCommandHandler).Assembly,
+                typeof(CreateUserCommandHandler).Assembly,
+                typeof(GetAllUsersQueryHandler).Assembly
+            );
+        });
 
         builder.Services.AddScoped<IAuthRepository, AuthRepository>();
         builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();

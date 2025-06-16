@@ -72,19 +72,6 @@ public class AuthService : IAuthService
             createUserRequest.Phone);
         return await _authRepository.AddAsync(user);
     }
-
-    public async Task<bool> ChangePasswordAsync(ChangePasswordDto changePassworDto)
-    {
-        var user = await _authRepository.GetByIdAsync(changePassworDto.UserId);
-
-        if (user is null)
-        {
-            throw new UserNotFoudException(changePassworDto.UserId);
-        }
-        
-        user.ChangePassword(changePassworDto.OldPassword, changePassworDto.NewPassword, _passwordHasher);
-        return await _authRepository.ChangePasswordAsync(user);
-    }
     
     private ClaimsIdentity GetByUser(User user)
     {
