@@ -5,42 +5,37 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Horeca.Controllers.Supporting.User;
 
-public class UserController : BaseController
+public class UserController(IMediator mediator)
+    : BaseController<GetAllUsersQuery, IReadOnlyList<Domain.Supporting.Auth.Entities.User>>(mediator)
 {
-    private readonly IMediator _mediator;
-    public UserController(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
-    [HttpGet]
-    [Produces("application/json")]
-    [ProducesResponseType(typeof(ActionResultDto<IReadOnlyList<Domain.Supporting.Auth.Entities.User>>),
-        StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ActionResultDto<IReadOnlyList<Domain.Supporting.Auth.Entities.User>>),
-        StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(typeof(ActionResultDto<IReadOnlyList<Domain.Supporting.Auth.Entities.User>>),
-        StatusCodes.Status403Forbidden)]
-    [ProducesResponseType(typeof(ActionResultDto<IReadOnlyList<Domain.Supporting.Auth.Entities.User>>),
-        StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetAll()
-    {
-        try
-        {
-            var data = await _mediator.Send(new GetAllUsersQuery());
-            return Ok(new ActionResultDto<IReadOnlyList<Domain.Supporting.Auth.Entities.User>>()
-            {
-                Data = data
-            });
-        }
-        catch (Exception e)
-        {
-            return BadRequest(new ActionResultDto<IReadOnlyList<Domain.Supporting.Auth.Entities.User>>()
-            {
-                Message = e.Message
-            });
-        }
-    }
+    // [HttpGet]
+    // [Produces("application/json")]
+    // [ProducesResponseType(typeof(ActionResultDto<IReadOnlyList<Domain.Supporting.Auth.Entities.User>>),
+    //     StatusCodes.Status200OK)]
+    // [ProducesResponseType(typeof(ActionResultDto<IReadOnlyList<Domain.Supporting.Auth.Entities.User>>),
+    //     StatusCodes.Status400BadRequest)]
+    // [ProducesResponseType(typeof(ActionResultDto<IReadOnlyList<Domain.Supporting.Auth.Entities.User>>),
+    //     StatusCodes.Status403Forbidden)]
+    // [ProducesResponseType(typeof(ActionResultDto<IReadOnlyList<Domain.Supporting.Auth.Entities.User>>),
+    //     StatusCodes.Status404NotFound)]
+    // public async Task<IActionResult> GetAll()
+    // {
+    //     try
+    //     {
+    //         var data = await _mediator.Send(new GetAllUsersQuery());
+    //         return Ok(new ActionResultDto<IReadOnlyList<Domain.Supporting.Auth.Entities.User>>()
+    //         {
+    //             Data = data
+    //         });
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         return BadRequest(new ActionResultDto<IReadOnlyList<Domain.Supporting.Auth.Entities.User>>()
+    //         {
+    //             Message = e.Message
+    //         });
+    //     }
+    // }
     
     [HttpPost("change-password")]
     [Produces("application/json")]
@@ -52,7 +47,7 @@ public class UserController : BaseController
     {
         try
         {
-            var result = await _mediator.Send(request);
+            var result = await mediator.Send(request);
             return Ok(new ActionResultDto<bool>()
             {
                 Data = result
