@@ -1,6 +1,6 @@
 ﻿namespace Domain.Core;
 
-public class IAggregateRoot
+public interface IAggregateRoot
 {
     
 }
