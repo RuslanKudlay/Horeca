@@ -9,6 +9,11 @@ public class Menu : BaseEntity, IAggregateRoot
     private readonly List<MenuGroup> _groups = new();
     public IReadOnlyCollection<MenuGroup> Groups => _groups;
 
+    public Menu(string name)
+    {
+        Name = name;
+    }
+
     public void AddGroup(MenuGroup group)
     {
         if (_groups.Any(g => g.Name == group.Name))

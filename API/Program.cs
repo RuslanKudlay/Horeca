@@ -1,6 +1,7 @@
 using Application.Commands.Supporting.Auth;
 using Application.Commands.Supporting.User;
 using Application.Queries.Supporting.User;
+using Application.Repositories.Core.MenuManagement;
 using Application.Repositories.Supporting.User.Interfaces;
 using Application.Services.Supporting.User.Interfaces;
 using Application.Services.Supporting.User.Services;
@@ -8,6 +9,7 @@ using Application.Supporting.Auth.Interfaces;
 using Application.Supporting.Auth.Services;
 using Horeca.Constants;
 using Infrastrucutre;
+using Infrastrucutre.Repositories.Core.MenuManagement;
 using Infrastrucutre.Repositories.Supporting.Interfaces;
 using Infrastrucutre.Repositories.Supporting.Services;
 using Infrastrucutre.Repositories.Supporting.User;
@@ -61,6 +63,7 @@ public class Program
         builder.Services.AddScoped<IAuthService, AuthService>();
         builder.Services.AddScoped<IUserService, UserService>();
         builder.Services.AddScoped<IUserRepository, UserRepository>();
+        builder.Services.AddScoped<IMenuManagementRepository, MenuManagementRepository>();
         
         builder.Services.AddControllers();
         

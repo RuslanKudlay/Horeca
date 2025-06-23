@@ -8,6 +8,9 @@ public class MenuGroup : BaseEntity, IEntity
     private readonly List<MenuItem> _items = new();
     public IReadOnlyCollection<MenuItem> Items => _items;
     
+    public Guid? ParentId { get; set; }
+    public MenuGroup? Parent { get; set; }
+    
     
     public Guid MenuId { get; private set; }
     public Menu Menu { get; private set; }
