@@ -49,7 +49,7 @@ public class AuthService : IAuthService
             audience: Options.AuthOptions.AUDIENCE,
             notBefore: now,
             claims: claim.Claims,
-            expires: now.AddSeconds(30),//now.Add(TimeSpan.FromMinutes(Options.AuthOptions.LIFETIME)),
+            expires: now.Add(TimeSpan.FromMinutes(Options.AuthOptions.LIFETIME)),
             signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256));
         var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 

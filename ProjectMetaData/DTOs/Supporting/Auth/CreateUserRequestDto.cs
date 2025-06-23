@@ -1,6 +1,6 @@
 ﻿namespace Horeca.DTOs.Supporting.Auth;
 
-public class CreateUserRequestDto
+public record CreateUserRequestDto
 {
     public string? Name { get; set; }
     public string Email { get; set; }

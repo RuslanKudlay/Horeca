@@ -19,7 +19,7 @@ public class ChangeUserPasswordCommandHandler : IRequestHandler<ChangePasswordCo
 
     public async Task<bool> Handle(ChangePasswordCommand request, CancellationToken cancellationToken)
     {
-        var dto = request.command;
+        var dto = request.dto;
 
         var user = await _userRepository.GetByIdAsync(dto.UserId);
         if (user is null)
