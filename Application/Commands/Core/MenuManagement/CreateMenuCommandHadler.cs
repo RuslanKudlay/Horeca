@@ -17,6 +17,6 @@ public class CreateMenuCommandHadler : IRequestHandler<CreateMenuCommand, bool>
     {
         var dto = request.dto;
         var menu = new Menu(dto.Name);
-        return await _managementRepository.AddAsync(menu);
+        return await _managementRepository.AddMenuAsync(menu);
     }
 }

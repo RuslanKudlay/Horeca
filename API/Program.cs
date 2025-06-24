@@ -1,5 +1,6 @@
 using Application.Commands.Supporting.Auth;
 using Application.Commands.Supporting.User;
+using Application.Configuration;
 using Application.Queries.Supporting.User;
 using Application.Repositories.Core.MenuManagement;
 using Application.Repositories.Supporting.User.Interfaces;
@@ -57,6 +58,8 @@ public class Program
                 typeof(GetAllUsersQueryHandler).Assembly
             );
         });
+        
+        builder.Services.AddAutoMapper(typeof(MappingProfile));
 
         builder.Services.AddScoped<IAuthRepository, AuthRepository>();
         builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
